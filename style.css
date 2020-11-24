@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+}
+
+.wrapper {
+
+}
+
+.content {
+    margin: 0 auto;
+    max-width: 1170px;
+}
+
+.clear_fix {
+    clear: both;
+}
+
+.top__info {
+    min-height: 40px;
+    background-color: #002137;
+    justify-content: space-between;
+}
+
+.info_content {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.city {
+    text-transform: uppercase;
+    color: #e5e5e5;
+    font-size: 14px;
+}
+.info_nav {
+    display: flex;
+}
+.info_nav_label {
+    margin-right: 40px;
+    text-transform: uppercase;
+    color: #e5e5e5;
+    font-size: 12px;
+    letter-spacing: 1px;
+    /*font-family: ПОДКЛЮЧИТЬ RALEWAY;*/
+} 
+.main_header {
+    margin: 26px 0 0 0;
+    max-height: 115px;
+}
+.header_content {
+    min-height: 115px;
+    display: flex;
+    align-items: center;
+}
+.header_logo {
+    width: 170px;
+    height: 75px;
+    background-color: #a54343;
+    border-radius: 5px;
+}
+.header_search {
+    width: 500px;
+    height: 50px;
+    background-color: #dedede;
+    border-radius: 5px;
+    position: relative;
+}
+.header_search > span {
+    position: absolute;
+    top: 50%;
+    text-transform: uppercase;
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    padding-left: 15px;
+    letter-spacing: 1px;
+    transform: translate(0, -50%);
+}
+.header_profile {
+}
+.header_basket {
+}
+.header_catalog {
+}
+.catalog_nav {
+}
+.catalog_pos_1 {
+}
+.catalog_pos_2 {
+}
+.catalog_pos_3 {
+}
+.catalog_pos_4 {
+}
+.catalog_pos_5 {
+}
+.catalog_pos_6 {
+}

@@ -9,6 +9,7 @@ $(document).ready(function() {
         autoplay: true,
         autoplaySpeed: 2000,
         verticalSwiping: true,
+        infinite: false,
     });
     $('.slider__product__pop').slick({
         slidesToShow: 4,

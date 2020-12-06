@@ -6,9 +6,6 @@ $(document).ready(function() {
         autoplaySpeed: 5000,
     });
     $('.slider__product__switch').slick({
-        autoplay: true,
-        autoplaySpeed: 2000,
-        verticalSwiping: true,
         infinite: false,
     });
     $('.slider__product__pop').slick({
@@ -16,8 +13,11 @@ $(document).ready(function() {
         slidesToScroll : 1,
         autoplay:true,
         autoplaySpeed: 5000,
+        centerMode: true,
     });
     $('.slider__product__new').slick({
+        slidesToShow: 4,
+        centerMode: true,
         autoplay:true,
         autoplaySpeed: 5000,
     });

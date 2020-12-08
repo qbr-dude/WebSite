@@ -317,6 +317,7 @@
 .slider__product__price {
 }
 .buy-button {
+    cursor: pointer;
     display: block;
     padding: 5px 15px;
     border-radius: 5px;

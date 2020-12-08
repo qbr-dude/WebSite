@@ -25,5 +25,5 @@ $(document).ready(function() {
     let prev = button_class[0].getElementsByClassName('slick-prev');
     prev[0].innerHTML = "Популярные";
     let next = button_class[0].getElementsByClassName('slick-next');
-    next[0].innerHTML = "Новые"
+    next[0].innerHTML = "Новые";
 });

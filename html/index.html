@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sliderStyle.css">
     <title>Computer Shop</title>
 </head>
+
 <body>
     <div class="wrapper">
         <header>
@@ -20,12 +23,14 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
+            <hr>
             <div class="main_header">
                 <div class="content">
                     <div class="header_content">
                         <div class="header_logo">
-                            <img src="../img/logo.jpg" alt="" class="img"></div>
+                            <a href="index.html"><img src="../img/logo.jpg" alt="" class="img"></a>
+                        </div>
                         <div class="header_search">
                             <form action="#" method="post">
                                 <input type="text" name="search" placeholder="Поиск по сайту">
@@ -35,10 +40,25 @@
                             <img src="../img/basket.svg" alt="basket_logo">
                             <span class="header_label">корзина</span>
                         </a>
-                        <a href="#" class="header_profile">
-                            <img src="../img/user.svg" alt="profile_logo">
-                            <span class="header_label">личный кабинет</span>
-                        </a>
+                        <div class="header-profile-container">
+                            <a href="#" class="header_profile" onclick="toggleLoginForm()" id="login-ref">
+                                <img src="../img/user.svg" alt="profile_logo">
+                                <span class="header_label">личный кабинет</span>
+                            </a>
+                            <div class="header-profile-form profile-form-inactive" id="login-form">
+                                <div class="profile-form-header">
+                                    <span>Авторизация</span>
+                                </div>
+                                <form action="#" method="post" id="profile-form">
+                                    <input type="text" name="login" placeholder="login"/>
+                                    <input type="password" name="password" id="pass" placeholder="password"/>
+                                    <div class="profile-buttons">
+                                        <input type="button" value="Регистрация"/>
+                                        <input type="submit" value="Войти"/>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -84,7 +104,7 @@
             </div>
         </header>
         <div class="main__body">
-            <div class="slider__container">
+            <!-- <div class="slider__container">
                 <div class="content">
                     <div class="slider__main">
                         <div class="slider__item">
@@ -122,10 +142,64 @@
                         </div>
                     </div>
                 </div>
+            </div> -->
+            <div class="container content">
+                <div id="content-slider">
+                    <div id="slider">
+                        <!-- Контейнер для слайдера -->
+                        <div id="mask">
+                            <!-- Маска -->
+                            <ul>
+                                <li id="first" class="firstanimation">
+                                    <!-- ID для всплывающей подсказки и класс для анимации -->
+                                    <a href="#"> <img src="../img/1.jpg" alt="Cougar" /> </a>
+                                    <div class="info">
+                                        <div>Акция №0</div>
+                                        <div>Бесплатная доставка</div>
+                                    </div>
+                                </li>
+
+                                <li id="second" class="secondanimation">
+                                    <a href="#"> <img src="../img/2.jpg" alt="Lions" /> </a>
+                                    <div class="info">
+                                        <div>Акция №1</div>
+                                        <div>Платная доставка</div>
+                                    </div>
+                                </li>
+
+                                <li id="third" class="thirdanimation">
+                                    <a href="#"> <img src="../img/3.jpg" alt="Snowalker" /> </a>
+                                    <div class="info">
+                                        <div>Акция №5</div>
+                                        <div>Быстрая доставка</div>
+                                    </div>
+                                </li>
+
+                                <li id="fourth" class="fourthanimation">
+                                    <a href="#"> <img src="../img/4.jpg" alt="Howling" /> </a>
+                                    <div class="info">
+                                        <div>Акция №2</div>
+                                        <div>Медленная доставка</div>
+                                    </div>
+                                </li>
+
+                                <li id="fifth" class="fifthanimation">
+                                    <a href="#"> <img src="../img/2.jpg" alt="Sunbathing" /> </a>
+                                    <div class="info">
+                                        <div>Акция №3</div>
+                                        <div>Доставка?</div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div> <!-- Конец маски -->
+                        <div class="progress-bar"></div> <!-- Строка выполнения-->
+                    </div> <!-- Конец контейнера для слайдера -->
+                </div>
             </div>
             <div class="pn__product">
                 <div class="content">
-                    <div class="slider__product__switch">
+                    <div class="slider__product__switch" id="slider-switch">
                         <div class="slider__product__pop">
                             <div class="slider__product">
                                 <img src="../img/1.jpg" alt="">
@@ -224,11 +298,21 @@
                             <span>Каталог</span>
                             <div class="main-catalog-nav">
                                 <div class="catalog-nav-container">
-                                    <a href="#" class="catalog-nav-ref"><div class="catalog-nav-item">Видеокарты</div></a>
-                                    <a href="#" class="catalog-nav-ref"><div class="catalog-nav-item">Процессоры</div></a>
-                                    <a href="#" class="catalog-nav-ref"><div class="catalog-nav-item">Память</div></a>
-                                    <a href="#" class="catalog-nav-ref"><div class="catalog-nav-item">Питание и охлаждение</div></a>
-                                    <a href="#" class="catalog-nav-ref"><div class="catalog-nav-item">Прочая переферия</div></a>
+                                    <a href="#" class="catalog-nav-ref">
+                                        <div class="catalog-nav-item">Видеокарты</div>
+                                    </a>
+                                    <a href="#" class="catalog-nav-ref">
+                                        <div class="catalog-nav-item">Процессоры</div>
+                                    </a>
+                                    <a href="#" class="catalog-nav-ref">
+                                        <div class="catalog-nav-item">Память</div>
+                                    </a>
+                                    <a href="#" class="catalog-nav-ref">
+                                        <div class="catalog-nav-item">Питание и охлаждение</div>
+                                    </a>
+                                    <a href="#" class="catalog-nav-ref">
+                                        <div class="catalog-nav-item">Прочая переферия</div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -346,6 +430,8 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="../js/slick.min.js"></script>
+    <script src="../js/toggleScript.js"></script>
     <script src="../js/script.js"></script>
 </body>
+
 </html>

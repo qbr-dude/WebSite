@@ -19,9 +19,12 @@ $(document).ready(function() {
         arrows: false,
         slidesToShow:1,
         asNavFor: '.item-info-switch',
+        infinite: false,
     });
     $('.item-info-switch').slick({
+        infinite: false,
         slidesToShow:6,
+        slidesToScroll: 6,
         arrows: false,
         asNavFor: '.info-container-slider',
         focusOnSelect: true,

@@ -3,6 +3,13 @@
     border: 0;
     text-decoration: none;
 }
+::before {
+    position: absolute;
+    display: block;
+    top: -5px;
+    left: 20px;
+    color: #491c1c;
+}
 hr {
     background-color: #bbbbbb;
     height: 1px;
@@ -110,14 +117,14 @@ hr {
     background-color: white;
     border-radius: 50%;
 }
-.header-profile-form {
+.header-profile-login {
     z-index: 10;
     border-radius: 5px;
     top: 35px;
     left: -50px;
     position: absolute;
     width: 300px;
-    height: 200px;
+    height: 260px;
     background-color: #6f6fff;
 }
 .profile-form-active-ref {
@@ -139,22 +146,52 @@ hr {
     flex-direction: column;
     justify-content: center;
 }
-.header-profile-form input[type="text"], input[type="password"] {
+.header-profile-form input[type="text"], input[type="password"], input[type="email"] {
     padding: 5px;
-    margin: 10px 35px;
+    margin: 12px 35px;
+    width: 220px;
 }
-.profile-buttons {
+.header-profile-form .error-input-tag, .error-input-tag-login, .error-input-tag-email {
+    position: relative;
+}
+.header-profile-form .error-input-tag::before {
+    content: "Некорректный логин или пароль";
+}
+.header-profile-form .error-input-tag-login::before {
+    content: "Логин занят";
+}
+.header-profile-form .error-input-tag-email::before {
+    content: "Почта занята";
+}
+.header-profile-form span {
+    opacity: 1;
+}
+#active-span {
+    opacity: .5;
+    cursor: pointer;
+}
+.header-profile-login .profile-buttons {
+    margin: 59px 35px 0 35px;
+    display: flex;
+    justify-content: space-around;
+}
+.header-profile-registration .profile-buttons {
     margin: 10px 35px;
     display: flex;
     justify-content: space-around;
 }
-.profile-buttons input[type="submit"], input[type="button"]{
-    width: 95px;
+.profile-buttons input[type="submit"] {
+    width: 140px;
     padding: 5px;
+    border-radius: 3px;
     font-size: 14px;
     cursor: pointer;
     color: #fff;
     background-color: #333333;
+}
+.profile-buttons input[type="submit"]:hover {
+    background-color: #CC6600;
+    color: #333333;
 }
 .profile-form-header {
     display: flex;
@@ -165,6 +202,16 @@ hr {
     background-color: #bbbbbb;
     font-size: 20px;
     height: 30px;
+}
+.header-profile-registration {
+    z-index: 10;
+    border-radius: 5px;
+    top: 35px;
+    left: -50px;
+    position: absolute;
+    width: 300px;
+    height: 260px;
+    background-color: #6f6fff;
 }
 .header_label {
     text-transform: uppercase;

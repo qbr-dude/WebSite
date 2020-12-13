@@ -45,18 +45,36 @@
                                 <img src="../img/user.svg" alt="profile_logo">
                                 <span class="header_label">личный кабинет</span>
                             </a>
-                            <div class="header-profile-form profile-form-inactive" id="login-form">
-                                <div class="profile-form-header">
-                                    <span>Авторизация</span>
-                                </div>
-                                <form action="#" method="post" id="profile-form">
-                                    <input type="text" name="login" placeholder="login"/>
-                                    <input type="password" name="password" id="pass" placeholder="password"/>
-                                    <div class="profile-buttons">
-                                        <input type="button" value="Регистрация"/>
-                                        <input type="submit" value="Войти"/>
+                            <div class="header-profile-form profile-form-inactive" id="login-div">
+                                <div class="header-profile-login" id="login-form">
+                                    <div class="profile-form-header">
+                                        <span>Авторизация</span>
+                                        /
+                                        <span id="active-span" onclick="toggleRegistration()">Регистрация</span>
                                     </div>
-                                </form>
+                                    <form action="#" method="post" id="profile-form">
+                                        <div class="error-input-tag"><input type="text" name="login" placeholder="login"/></div>
+                                        <div class="error-input-tag"><input type="password" name="password" id="pass" placeholder="password"/></div>
+                                        <div class="profile-buttons">
+                                            <input type="submit" value="Войти"/>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="header-profile-registration profile-form-inactive" id="registration-form">
+                                    <div class="profile-form-header">
+                                        <span id="active-span" onclick="toggleRegistration()">Авторизация</span>
+                                        /
+                                        <span>Регистрация</span>
+                                    </div>
+                                    <form action="#" method="post" id="profile-form">
+                                        <div class="error-input-tag-login"><input type="text" name="login" placeholder="login"/></div>
+                                        <div class="error-input-tag-email"><input type="email" name="email" placeholder="e-mail"/></div>
+                                        <input type="password" name="password" id="pass" placeholder="password"/>
+                                        <div class="profile-buttons">
+                                            <input type="submit" value="Зарегестрироваться"/>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

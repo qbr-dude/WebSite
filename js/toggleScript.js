@@ -34,3 +34,10 @@ function toggleRegistration() {
         registrationState = true;
     }
 }
+
+document.addEventListener('click', function(event) {
+    if (!loginRef.contains(event.target) && !loginDiv.contains(event.target)) {
+        loginDiv.classList.add('profile-form-inactive');
+        loginRef.classList.remove('profile-form-active-ref');
+    }
+}, true);

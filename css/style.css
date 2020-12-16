@@ -100,6 +100,49 @@ hr {
     margin: -5px 5px 0 0;
     border-radius: 5px;
 }
+.header-basket-container {
+    position: relative;
+}
+.header-basket-form {
+    position: absolute;
+    z-index: 10;
+    left: -90px;
+    background-color: #6f6fff;
+    width: 250px;
+    margin: 10px 0 0 0;
+    border-radius: 5px;
+}
+.basket-container {
+    margin: 20px 0;
+}
+.basket-form-header {
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    padding: 5px 10px;
+    background-color: #bbbbbb;
+}
+.basket-item {
+    display: flex;
+    justify-content: space-around;
+}
+.basket-buttons {
+    display: flex;
+    width: 200px;
+    justify-content: space-around;
+    margin: 25px 25px;
+}
+.basket-buttons input[type="submit"] {
+    width: 70px;
+    padding: 2px;
+    border-radius: 3px;
+    background-color: #333333;
+    color: #fff;
+}
+.basket-buttons input[type="submit"]:hover {
+    background-color: #CC6600;
+    color: #333333;
+}
 .header-profile-container {
     position: relative;
 }

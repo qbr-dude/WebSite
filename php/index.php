@@ -1,3 +1,8 @@
+<?php 
+    session_start();
+    
+    include_once "connectBD.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,56 +42,76 @@
                                 <input type="text" name="search" placeholder="Поиск по сайту">
                             </form>
                         </div>
-                        <div class="header-basket-container">
-                            <a href="#" class="header_basket">
-                                <img src="../img/basket.svg" alt="basket_logo">
-                                <span class="header_label">корзина</span>
-                            </a>
-                            <div class="header-basket-form" id="basket-div">
-                                <div class="basket-form-header">
-                                    <span>Корзина</span>
-                                </div>
-                                <div class="basket-container">
-                                    <form action="#" method="post">
-                                        <div class="basket-item"><input type="checkbox" name="" id="">
-                                            <div class="item-name">Some name</div>
-                                        </div>
-                                        <div class="basket-buttons">
-                                            <input type="submit" value="Очистить">
-                                            <input type="submit" value="Купить">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="#" class="header_basket">
+                            <img src="../img/basket.svg" alt="basket_logo">
+                            <span class="header_label">корзина</span>
+                        </a>
                         <div class="header-profile-container">
-                            <a href="#" class="header_profile" onclick="toggleLoginForm()" id="login-ref">
+                            <a href="#" class="header_profile
+                                <?php
+                                    if($_SESSION['registration'] == 1 || $_SESSION['authorisation'] == 1) {
+                                        echo " profile-form-active-ref";
+                                    }
+                                ?>" onclick="toggleLoginForm()" id="login-ref">
                                 <img src="../img/user.svg" alt="profile_logo">
                                 <span class="header_label">личный кабинет</span>
                             </a>
-                            <div class="header-profile-form profile-form-inactive" id="login-div">
-                                <div class="header-profile-login" id="login-form">
+                            <div class="header-profile-form 
+                                <?php
+                                    if($_SESSION['registration'] == 0 && $_SESSION['authorisation'] == 0) {
+                                        echo " profile-form-inactive";
+                                    }
+                                ?>" id="login-div">
+                                <div class="header-profile-login
+                                <?php
+                                    if($_SESSION['registration'] == 1) {
+                                        echo " profile-form-inactive";
+                                    } 
+                                ?>" id="login-form">
                                     <div class="profile-form-header">
                                         <span>Авторизация</span>
                                         /
                                         <span id="active-span" onclick="toggleRegistration()">Регистрация</span>
                                     </div>
                                     <form action="#" method="post" id="profile-form">
-                                        <div class="error-input-tag"><input type="text" name="login" placeholder="login"/></div>
-                                        <div class="error-input-tag"><input type="password" name="password" id="pass" placeholder="password"/></div>
+                                        <div class="
+                                        <?php
+                                            if($_SESSION['authorisation'] == 0) {
+                                                echo " error-input-tag";
+                                            }
+                                        ?>"><input type="text" name="login" placeholder="login"/></div>
+                                        <div class="
+                                        <?php
+                                            if($_SESSION['authorisation'] == 0) {
+                                                echo " error-input-tag";
+                                            }
+                                        ?>"><input type="password" name="password" id="pass" placeholder="password"/></div>
                                         <div class="profile-buttons">
                                             <input type="submit" value="Войти"/>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="header-profile-registration profile-form-inactive" id="registration-form">
+                                <div class="header-profile-registration
+                                <?php
+                                    if($_SESSION['registration'] == 0) {
+                                        echo " profile-form-inactive";
+                                    }
+                                ?>" id="registration-form">
                                     <div class="profile-form-header">
                                         <span id="active-span" onclick="toggleRegistration()">Авторизация</span>
                                         /
                                         <span>Регистрация</span>
                                     </div>
                                     <form action="../php/registration.php" method="post" id="profile-form">
-                                        <div class=""><input type="text" name="login" placeholder="login"/></div>
+                                        <div class="
+                                        <?php 
+                                            if($_SESSION['registration'] == 1) {
+                                                $errors = $_SESSION["errors"];
+                                                if($errors["login_lenght"] == 1) 
+                                                    echo "error-input-tag-login";
+                                            }
+                                        ?>">
+                                        <input type="text" name="login" placeholder="login"/></div>
                                         <div class=""><input type="email" name="email" placeholder="e-mail"/></div>
                                         <input type="password" name="password" id="pass" placeholder="password"/>
                                         <div class="profile-buttons">
@@ -141,45 +166,6 @@
             </div>
         </header>
         <div class="main__body">
-            <!-- <div class="slider__container">
-                <div class="content">
-                    <div class="slider__main">
-                        <div class="slider__item">
-                            <img src="../img/1.jpg" alt="#">
-                            <div class="slider__text">
-                                <div class="slider__text__header">
-                                    <span>Акция №1</span>
-                                </div>
-                                <div class="slider__text__label">
-                                    <span>Скидка при покупке более&nbsp2ух&nbspтоваров&nbspсразу</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slider__item">
-                            <img src="../img/2.jpg" alt="#">
-                            <div class="slider__text">
-                                <div class="slider__text__header">
-                                    <span>Акция №2</span>
-                                </div>
-                                <div class="slider__text__label">
-                                    <span>Бесплатная доставка при покупке&nbspот&nbsp50&nbsp000&nbspрублей</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slider__item">
-                            <img src="../img/3.jpg" alt="#">
-                            <div class="slider__text">
-                                <div class="slider__text__header">
-                                    <span>Акция №3</span>
-                                </div>
-                                <div class="slider__text__label">
-                                    <span>Подбери процессор&nbspи видеокарту, и получи скидку на&nbspпереферию</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <div class="container content">
                 <div id="content-slider">
                     <div id="slider">
@@ -354,7 +340,42 @@
                             </div>
                         </div>
                         <div class="main-catalog-container">
-                            <div class="main-catalog-row">
+                            <?php
+                                $result = mysqli_query($db, "SELECT * FROM `Products`");
+                                
+                                if(isset($result)) {
+                                    $rowCount = 3;
+                                    echo "<div class=\"main-catalog-row\">";
+                                    while($item = mysqli_fetch_assoc($result)) {
+                                        ?>
+                                        <div class="main-catalog-item">
+                                            <img src="<?php echo $item['images'] ?>" alt="">
+                                            <div class="catalog-item-text">
+                                                <div class="catalog-item-label">
+                                                <span><?php echo $item['name'] ?></span>
+                                                </div>
+                                                <div class="catalog-item-price">
+                                                    <span><?php echo $item['cost'] ?></span>
+                                                </div>
+                                            </div>
+                                            <a href="../html/item.html" class="buy-button">
+                                            <span>Купить</span>
+                                        </a>
+                                        </div>
+                                        <?php
+                                        $rowCount--;
+                                        if($rowCount == 0) {
+                                            ?></div>
+                                            <div class="main-catalog-row">
+                                            <?php
+                                            $rowCount = 3;
+                                        }
+                                    }
+                                    ?></div><?php
+                                }
+                               
+                            ?>
+                            <!-- <div class="main-catalog-row">
                                 <div class="main-catalog-item">
                                     <img src="../img/4.jpg" alt="">
                                     <div class="catalog-item-text">
@@ -441,7 +462,7 @@
                                         <span>Купить</span>
                                     </a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

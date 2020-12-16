@@ -1,0 +1,38 @@
+1) передать флаг успешной регистрации или входа
+2) передать данные всех товаров в html в блоки с именами name{$} и брать эти блоки из js
+<?php
+                                include_once('DBItems.php');
+                                $allProducts = $_SESSION['allProducts'];
+                                if(count($allProducts) > 0) {
+                                    $rowCount = 3;
+                                    echo "<div class=\"main-catalog-row\">";
+                                    foreach($product in $allProducts) {
+                                        if($rowCount > 0) {
+                                            echo "
+                                            <div class=\"main-catalog-item\">
+                                                <img src=\""{$product['images']}"\" alt=\"\">
+                                                <div class=\"catalog-item-text\">
+                                                    <div class=\"catalog-item-label\">
+                                                        <span>"{$product['name']}"</span>
+                                                    </div>
+                                                    <div class=\"catalog-item-price\">
+                                                        <span>"{$product['cost']}"</span>
+                                                    </div>
+                                                </div>
+                                                <a href=\"../html/item.html\" class=\"buy-button\">
+                                                    <span>Купить</span>
+                                                </a>
+                                            </div>";
+                                        }
+                                        else {
+                                            echo "
+                                            </div>
+                                            <div class=\"main-catalog-row\">"
+                                            $rowCount = 3;
+                                        }
+                                    }
+                                    ?></div><?php
+                                } else {
+                                    echo "Empty catalog";
+                                }
+                            ?>

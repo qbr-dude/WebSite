@@ -38,17 +38,18 @@
                             </form>
                         </div>
                         <div class="header-basket-container">
-                            <a href="#" class="header_basket">
+                            <a href="#" class="header_basket" onclick="toggleBasket()" id="basket-ref">
                                 <img src="../img/basket.svg" alt="basket_logo">
                                 <span class="header_label">корзина</span>
                             </a>
-                            <div class="header-basket-form" id="basket-div">
-                                <div class="basket-form-header">
+                            <div class="header-basket-form profile-form-inactive" id="basket-div">
+                                <div class="basket-form-header active">
                                     <span>Корзина</span>
                                 </div>
                                 <div class="basket-container">
                                     <form action="#" method="post">
-                                        <div class="basket-item"><input type="checkbox" name="" id="">
+                                        <div class="basket-item">
+                                            <input type="checkbox" name="" id="">
                                             <div class="item-name">Some name</div>
                                         </div>
                                         <div class="basket-buttons">
@@ -137,6 +138,20 @@
                             <div class="span catalog_label">сборка</div>
                         </div>
                     </a>
+                </div>
+            </div>
+            <div class="add-edit-container" id="add-edit">
+                <div class="add-form-container">
+                    <div class="add-edit-header">
+                        <span>Добавить новый товар</span>
+                    </div>
+                    <div class="add-form">
+                        <form action="#" method="post">
+                            <div class="add-edit-input"><input type="text" name="name" placeholder="Имя товара"/></div>
+                            <div class="add-edit-input"><input type="text" name="cost" placeholder="Имя товара"/></div>
+                            <div class="add-edit-input"><input type="file" accept=".jpg, .jpeg, .png" name="" id=""></div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </header>

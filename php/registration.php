@@ -15,16 +15,16 @@ $pass = md5($pass."md5encryption");
 
 include ('connectBD.php');
 
-$result = mysql_query("SELECT login FROM Users WHERE login = '$login'", $bd);
-$myrow = mysql_fetch_array($result);
-if (!empty($myrow['id'])) {
+$result = mysqli_query($db, "SELECT `login` FROM `Users` WHERE `login` = '$login'");
+$myrow = mysqli_fetch_assoc($result);
+if (!empty($myrow['login'])) {
 	$errors['login_compare'] = 1;
 }
 
 
 if(count($errors) == 0) {
 	$today = date("y.m.d h:m:s"); 
-	mysql_query ("INSERT INTO Users (login, password, email, type, date)
+	mysqli_query ($db, "INSERT INTO `Users` (`login`, `password`, `email`, `type`, `date`)
 					VALUES('$login', '$pass', '$email', 0, '$today')");
 }
 
@@ -38,7 +38,6 @@ else
 	$_SESSION["registration"] = 0;
 }
 
-
-header('Location: DBItems.php');
+header('Location: index.php');
 
 ?>

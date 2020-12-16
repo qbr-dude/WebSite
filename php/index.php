@@ -42,10 +42,47 @@
                                 <input type="text" name="search" placeholder="Поиск по сайту">
                             </form>
                         </div>
-                        <a href="#" class="header_basket">
-                            <img src="../img/basket.svg" alt="basket_logo">
-                            <span class="header_label">корзина</span>
-                        </a>
+                        <div class="header-basket-container">
+                            <a href="#" class="header_basket" onclick="toggleBasket()" id="basket-ref">
+                                <img src="../img/basket.svg" alt="basket_logo">
+                                <span class="header_label">корзина</span>
+                            </a>
+                            <div class="header-basket-form profile-form-inactive" id="basket-div">
+                                <div class="basket-form-header active">
+                                    <span>Корзина</span>
+                                </div>
+                                <div class="basket-container">
+                                    <?php
+                                        include_once "basket.php";
+                                        $basket = $_SESSION['basket'];
+                                        if(isset($_SESSION['current_user'])) {
+                                            if(count($basket) > 0) {
+                                                ?>
+                                                <form action="#" method="post">
+                                                    <?php
+                                                        while($item = mysqli_fetch_assoc($basket)) {
+                                                            ?>
+                                                            <div class="basket-item">
+                                                                <input type="checkbox" name="<?php echo $item['id']?>" id="<?php echo $item['id']?>">
+                                                                <div class="item-name"><?php echo getItemById($item['id_prod'])?></div>
+                                                            </div>
+                                                            <?
+                                                        }                                                
+                                                    ?>
+                                                    <div class="basket-buttons">
+                                                        <input type="submit" value="Очистить">
+                                                        <input type="submit" value="Купить">
+                                                    </div>
+                                                </form>
+                                                <?php
+                                            }
+                                        } else {
+                                            echo "<center>Авторизуйтесь</center>";
+                                        }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
                         <div class="header-profile-container">
                             <a href="#" class="header_profile
                                 <?php
@@ -107,7 +144,7 @@
                                         <?php 
                                             if($_SESSION['registration'] == 1) {
                                                 $errors = $_SESSION["errors"];
-                                                if($errors["login_lenght"] == 1) 
+                                                if($errors["login_lenght"] == 1 || $errors['login_compare']) 
                                                     echo "error-input-tag-login";
                                             }
                                         ?>">
@@ -118,6 +155,7 @@
                                             <input type="submit" value="Зарегестрироваться"/>
                                         </div>
                                     </form>
+                                    ac
                                 </div>
                             </div>
                         </div>
@@ -163,6 +201,8 @@
                         </div>
                     </a>
                 </div>
+            </div>
+            <div class="add-edit-layout" id="add">
             </div>
         </header>
         <div class="main__body">
@@ -355,10 +395,17 @@
                                                 <span><?php echo $item['name'] ?></span>
                                                 </div>
                                                 <div class="catalog-item-price">
-                                                    <span><?php echo $item['cost'] ?></span>
+                                                    <span><?php echo $item['cost'] ?> руб</span>
                                                 </div>
                                             </div>
-                                            <a href="../html/item.html" class="buy-button">
+                                                <a href="../html/item.html" class="buy-button">
+                                                <?php
+                                                    if($_SESSION['user_type'] == 1) {
+                                                        ?>
+                                                            <a href="#" onclick="callEditForm()">Edit</a>
+                                                        <?php
+                                                    }
+                                                ?>
                                             <span>Купить</span>
                                         </a>
                                         </div>

@@ -15,7 +15,12 @@
     <title>Computer Shop</title>
 </head>
 
-<body>
+<body <? if($_SESSION['set_scroll'] == 1) {
+    ?> 
+        onload="document.getElementsByName('scroll-point')[0].scrollIntoView(1)";
+    <?php }
+       unset($_SESSION['set_scroll']); 
+    ?>>
     <div class="wrapper">
         <header>
             <div class="top__info">
@@ -35,7 +40,7 @@
                 <div class="content">
                     <div class="header_content">
                         <div class="header_logo">
-                            <a href="index.html"><img src="../img/logo.jpg" alt="" class="img"></a>
+                            <a href="../php/index.php"><img src="../img/logo.jpg" alt="" class="img"></a>
                         </div>
                         <div class="header_search">
                             <form action="#" method="post">
@@ -58,20 +63,31 @@
                                         if(isset($_SESSION['current_user'])) {
                                             if(count($basket) > 0) {
                                                 ?>
-                                                <form action="#" method="post">
+                                                <form action="../php/deleteBasket.php" method="post">
                                                     <?php
                                                         while($item = mysqli_fetch_assoc($basket)) {
+                                                                $id = $item['id_prod'];
+                                                                $id_prod = mysqli_query($db, "SELECT `name` FROM `Products` WHERE `id` = $id");
+                                                                $item_name = mysqli_fetch_assoc($id_prod);
                                                             ?>
                                                             <div class="basket-item">
-                                                                <input type="checkbox" name="<?php echo $item['id']?>" id="<?php echo $item['id']?>">
-                                                                <div class="item-name"><?php echo getItemById($item['id_prod'])?></div>
+                                                                <input type="checkbox" name="item[]" value="<?php echo $item['id'];?>">
+                                                                <div class="item-name">
+                                                                    <?php 
+                                                                        echo $item_name['name'];
+                                                                        echo " ".$item['i_count']."шт.";
+                                                                    ?>
+                                                                </div>
+
                                                             </div>
                                                             <?
+                                                                unset($id_prod);
+                                                                unset($item_name);
                                                         }                                                
                                                     ?>
                                                     <div class="basket-buttons">
-                                                        <input type="submit" value="Очистить">
-                                                        <input type="submit" value="Купить">
+                                                        <input type="submit" name="delete" value="Очистить">
+                                                        <input type="submit" name="out" value="Купить">
                                                     </div>
                                                 </form>
                                                 <?php
@@ -84,56 +100,95 @@
                             </div>
                         </div>
                         <div class="header-profile-container">
-                            <a href="#" class="header_profile
+                            <?php
+                                if (isset($_SESSION['authorisation']) && $_SESSION['authorisation'] == 0) {
+                                    ?>
+                                        <a href="#" class="header_profile" onclick="toggleUserMenu()" id="user-ref">
+                                            <img src="../img/user.svg" alt="profile_logo">
+                                            <span class="header_label"><?php echo $_SESSION['current_user']; ?></span>
+                                        </a>
+                                        <div class="header-profile-user profile-form-inactive" id="user-div">
+                                            <?php 
+                                                if($_SESSION['user_type'] == 1) {
+                                                    ?>
+                                                    <div class="header-profile-admin">
+                                                        <a href="#" class="header-profile-nav" onclick="callAddForm()"><span>Добавить товар</span></a>    
+                                                        <hr>
+                                                        <form action="../php/unlogin.php" method="post">
+                                                            <div class="header-profile-nav"><input type="submit" value="Выйти из профиля"></div>
+                                                        </form> 
+                                                        </div>
+                                                    <?php
+                                                } else if($_SESSION['user_type'] == 0) {
+                                                    ?>
+                                                    <div class="header-profile-common">   
+                                                        <hr>
+                                                        <form action="../php/unlogin.php" method="post">
+                                                            <div class="header-profile-nav"><input type="submit" value="Выйти из профиля"></div>
+                                                        </form> 
+                                                    </div>
+                                                    <?php
+                                                }
+                                            ?>
+                                        </div>
+                                    <?php
+                                } 
+                                else {
+                                ?>
+                                <a href="#" class="header_profile
                                 <?php
                                     if($_SESSION['registration'] == 1 || $_SESSION['authorisation'] == 1) {
                                         echo " profile-form-active-ref";
                                     }
-                                ?>" onclick="toggleLoginForm()" id="login-ref">
-                                <img src="../img/user.svg" alt="profile_logo">
-                                <span class="header_label">личный кабинет</span>
-                            </a>
-                            <div class="header-profile-form 
+                                    ?>" onclick="toggleLoginForm()" id="login-ref">
+                                    <img src="../img/user.svg" alt="profile_logo">
+                                    <span class="header_label">личный кабинет</span>
+                                </a>
+                                <div class="header-profile-form 
                                 <?php
-                                    if($_SESSION['registration'] == 0 && $_SESSION['authorisation'] == 0) {
-                                        echo " profile-form-inactive";
-                                    }
+                                if($_SESSION['registration'] == 0 && $_SESSION['authorisation'] == 0) {
+                                    echo " profile-form-inactive";
+                                }
                                 ?>" id="login-div">
                                 <div class="header-profile-login
-                                <?php
+                                    <?php
                                     if($_SESSION['registration'] == 1) {
                                         echo " profile-form-inactive";
                                     } 
-                                ?>" id="login-form">
+                                    ?>" id="login-form">
                                     <div class="profile-form-header">
                                         <span>Авторизация</span>
                                         /
                                         <span id="active-span" onclick="toggleRegistration()">Регистрация</span>
                                     </div>
-                                    <form action="#" method="post" id="profile-form">
+                                    <form action="../php/login.php" method="post" id="profile-form">
                                         <div class="
                                         <?php
-                                            if($_SESSION['authorisation'] == 0) {
-                                                echo " error-input-tag";
+                                            if($_SESSION['authorisation'] == 1) {
+                                                if($_SESSION['login_wrong'] == 1) {
+                                                    echo " error-input-tag";
+                                                }
                                             }
                                         ?>"><input type="text" name="login" placeholder="login"/></div>
                                         <div class="
                                         <?php
-                                            if($_SESSION['authorisation'] == 0) {
-                                                echo " error-input-tag";
+                                            if($_SESSION['authorisation'] == 1) {
+                                                if($_SESSION['pass_wrong'] == 1) {
+                                                    echo " error-input-tag";
+                                                }
                                             }
                                         ?>"><input type="password" name="password" id="pass" placeholder="password"/></div>
                                         <div class="profile-buttons">
                                             <input type="submit" value="Войти"/>
                                         </div>
                                     </form>
-                                </div>
-                                <div class="header-profile-registration
-                                <?php
+                                    </div>
+                                    <div class="header-profile-registration
+                                    <?php
                                     if($_SESSION['registration'] == 0) {
                                         echo " profile-form-inactive";
                                     }
-                                ?>" id="registration-form">
+                                    ?>" id="registration-form">
                                     <div class="profile-form-header">
                                         <span id="active-span" onclick="toggleRegistration()">Авторизация</span>
                                         /
@@ -155,9 +210,9 @@
                                             <input type="submit" value="Зарегестрироваться"/>
                                         </div>
                                     </form>
-                                    ac
                                 </div>
                             </div>
+                            <?php }?>
                         </div>
                     </div>
                 </div>
@@ -202,7 +257,72 @@
                     </a>
                 </div>
             </div>
-            <div class="add-edit-layout" id="add">
+            <div class="add-edit-content  profile-form-inactive" id="add-edit">
+                <div class="add-edit-container">
+                    <div class="add-form-content profile-form-inactive" id="add-div">
+                        <div class="add-form-container">
+                            <div class="add-edit-header">
+                                <span>Добавить новый товар</span>
+                            </div>
+                            <div class="add-form">
+                                <form action="../php/addProduct.php" method="post" enctype="multipart/form-data">
+                                    <div class="add-edit-input"><input type="text" name="name" placeholder="Имя товара"/></div>
+                                    <div class="add-edit-input"><input type="text" name="cost" placeholder="Стоимость"/></div>
+                                    <div class="add-edit-input">
+                                        <select name="type" id="">
+                                            <option value="0">Видеокарта</option>
+                                            <option value="1">Процессор</option>
+                                            <option value="2">Память</option>
+                                        </select>
+                                    </div>
+                                    <span>Выберите фото для товара</span>
+                                    <div class="add-edit-input"><input type="file" accept=".jpg, .jpeg, .png" name="photo" id="photo"></div>
+                                    <div class="add-edit-buttons">
+                                        <div class="add-edit-input"><input type="reset" value="Сбросить"></div>
+                                        <div class="add-edit-input"><input type="submit" value="Создать"></div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="close-form"><a href="#" onclick="closeAddForm()">X</a></div>
+                        </div>
+                    </div>
+                    <div class="edit-form-content profile-form-inactive" id="edit-div">
+                        <div class="edit-form-container">
+                            <div class="add-edit-header">
+                                <span>Отредактировать товар</span>
+                            </div>
+                            <div class="edit-form">
+                                <form action="../php/changeProduct.php" method="post" enctype="multipart/form-data">
+                                    <?php
+                                        $item_id = $_SESSION['edit_id'];
+                                        $result = mysqli_query($db, "SELECT * FROM `Products` WHERE `id` = '$item_id'");
+                                        while($item = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                    <div class="add-edit-input"><input type="text" name="name" value="<?php echo $item['name'];?>"/></div>
+                                    <div class="add-edit-input"><input type="text" name="cost" value="<?php echo $item['cost'];?>"/></div>
+                                    <div class="add-edit-input">
+                                        <select name="type" id="">
+                                            <option value="0" <?php if($item['type'] == 0) {?> selected="selected" <?php;}?>>Видеокарта</option>
+                                            <option value="1" <?php if($item['type'] == 1) {?> selected="selected"<?php;}?>>Процессор</option>
+                                            <option value="2" <?php if($item['type'] == 2) {?> selected="selected"<?php;}?>>Память</option>
+                                        </select>
+                                    </div>
+                                    <span>Выберите фото для товара</span>
+                                    <div class="add-edit-input"><input type="file" accept=".jpg, .jpeg, .png" name="photo" id="photo"></div>
+                                    <div class="add-edit-buttons">
+                                        <input type="hidden" name="edit-id" value="<?php echo $item_id;?>">
+                                        <div class="add-edit-input"><input type="reset" value="Очистить"></div>
+                                        <div class="add-edit-input"><input type="submit" value="Принять"></div>
+                                    </div>
+                                    <img src="<?php echo $item['images']?>" alt="" class="edit-img">
+                                    <?php }
+                                    ?>
+                                </form>
+                            </div>
+                            <div class="close-form"><a href="#" onclick="closeEditForm()">X</a></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
         <div class="main__body">
@@ -354,6 +474,7 @@
                     </div>
                 </div>
             </div>
+            <a name="scroll-point"></a>
             <div class="main-catalog">
                 <div class="content">
                     <div class="main-catalog-content">
@@ -361,15 +482,11 @@
                             <span>Каталог</span>
                             <div class="main-catalog-nav">
                                 <div class="catalog-nav-container">
-                                    <a href="#" class="catalog-nav-ref">
-                                        <div class="catalog-nav-item">Видеокарты</div>
-                                    </a>
-                                    <a href="#" class="catalog-nav-ref">
-                                        <div class="catalog-nav-item">Процессоры</div>
-                                    </a>
-                                    <a href="#" class="catalog-nav-ref">
-                                        <div class="catalog-nav-item">Память</div>
-                                    </a>
+                                    <form action="../php/sorting.php" method="post">
+                                        <div class="catalog-nav-ref"><input type="submit" value="Видеокарты" name="0"></div>
+                                        <div class="catalog-nav-ref"><input type="submit" value="Процессоры" name="1"></div>
+                                        <div class="catalog-nav-ref"><input type="submit" value="Память" name="2"></div>
+                                    </form>
                                     <a href="#" class="catalog-nav-ref">
                                         <div class="catalog-nav-item">Питание и охлаждение</div>
                                     </a>
@@ -381,7 +498,13 @@
                         </div>
                         <div class="main-catalog-container">
                             <?php
-                                $result = mysqli_query($db, "SELECT * FROM `Products`");
+                                if(isset($_SESSION['sort']) && $_SESSION['sort'] == 1) {
+                                    $sort_type = $_SESSION['sort_type'];
+                                    $result = mysqli_query($db, "SELECT * FROM `Products` WHERE `type` = '$sort_type'");
+                                    unset($_SESSION['sort']);
+                                } else {
+                                    $result = mysqli_query($db, "SELECT * FROM `Products`");
+                                }
                                 
                                 if(isset($result)) {
                                     $rowCount = 3;
@@ -398,17 +521,27 @@
                                                     <span><?php echo $item['cost'] ?> руб</span>
                                                 </div>
                                             </div>
-                                                <a href="../html/item.html" class="buy-button">
                                                 <?php
                                                     if($_SESSION['user_type'] == 1) {
                                                         ?>
-                                                            <a href="#" onclick="callEditForm()">Edit</a>
+                                                            <div class="edit-delete-buttons">
+                                                                <form action="../php/startEdit.php" method="post" class="inside-form">
+                                                                    <input type="submit" value="Редакт." name="<?php echo $item['id']?>" />
+                                                                </form>
+                                                                <form action="../php/deleteProduct.php" method="post" class="inside-form">
+                                                                    <input type="submit" value="Удалить" name="<?php echo $item['id']?>" >
+                                                                </form>
+                                                            </div>
+                                                            <!-- <a href="#" onclick="callEditForm()">Edit</a> -->
                                                         <?php
+                                                        // $_SESSION['edit_id'] = $item['id'];
                                                     }
                                                 ?>
-                                            <span>Купить</span>
-                                        </a>
-                                        </div>
+                                                <form action="../php/addBasket.php" method="post">
+                                                    <input type="hidden" name="idProduct" value="<?php echo $item['id'];?>">
+                                                    <input type="submit" value="Купить" class="buy-button">
+                                                </form>
+                                            </div>
                                         <?php
                                         $rowCount--;
                                         if($rowCount == 0) {
@@ -420,7 +553,8 @@
                                     }
                                     ?></div><?php
                                 }
-                               
+                                unset($result);
+                                unset($item);
                             ?>
                             <!-- <div class="main-catalog-row">
                                 <div class="main-catalog-item">
@@ -537,6 +671,14 @@
     <script src="../js/slick.min.js"></script>
     <script src="../js/toggleScript.js"></script>
     <script src="../js/script.js"></script>
+    <?php
+        if(isset($_SESSION['edit']) && $_SESSION['edit'] == 1) {
+            ?>
+            <script>callEditForm();</script>
+            <?
+            unset($_SESSION['edit']);
+        }    
+    ?>
 </body>
 
 </html>

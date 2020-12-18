@@ -11,6 +11,7 @@
     color: #491c1c;
 }
 hr {
+    display: block;
     background-color: #bbbbbb;
     height: 1px;
 }
@@ -129,7 +130,10 @@ header {
 }
 .basket-item {
     display: flex;
-    justify-content: space-around;
+    margin: 0 0 0 50px;
+}
+.item-name {
+    margin: 0 0 0 40px;
 }
 .basket-buttons {
     display: flex;
@@ -521,9 +525,19 @@ header {
 .catalog-nav-container {
 
 }
-.catalog-nav-ref {
-    display: block;
-    margin: 10px;
+.catalog-nav-ref input {
+    cursor: pointer;
+    display: flex;
+    font-size: 18px;
+    width: 180px;
+    height: 70px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #6d6d6d;
+    color: #fff;
+    padding: 0 0 0 10px;
+    margin: 10px 0;
+    font-family: serif;
 }
 .catalog-nav-item {
     display: flex;
@@ -535,8 +549,9 @@ header {
     background-color: #6d6d6d;
     color: #fff;
     padding: 0 0 0 10px;
+    margin: 10px 0;
 }
-.catalog-nav-item:hover {
+.catalog-nav-item:hover, .catalog-nav-ref input:hover{
     background-color: rgba(204, 102, 0, 0.6);
     transition: .2s linear;
 }
@@ -561,6 +576,22 @@ header {
     margin: 20px 0 0 0;
     width: 200px;
     height: 200px;
+}
+.edit-delete-buttons {
+    display: flex;
+    margin: -10px 0 -5px 0;
+}
+.edit-delete-buttons input:hover {
+    cursor: pointer;
+    color: #333333;
+}
+.inside-form input[type="submit"] {
+    color: white;
+    display: block;
+    background-color: red;
+    padding: 5px 10px;
+    margin: 0 3px;
+    border-radius: 3px;
 }
 .catalog-item-text {
     margin: 25px 0 25px -75px;
@@ -604,10 +635,132 @@ footer {
     color: #e5e5e5;
     text-transform: uppercase;
 }
-
-.add-edit-container {
+.add-edit-content {
     position: absolute;
     z-index: 500;
-    left: 45%;
-    background-color: yellow;
+    left: 40%;
+    top: 150px;
+    width: 350px;
+    height: 285px;
+    border-radius: 5px;
+    background-color: #bbbbbb;
+}
+.add-edit-container {
+    position: relative;
+}
+.add-form-content, .edit-form-content {
+    position: absolute;
+}
+.add-form-container, .edit-form-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.add-edit-header {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    width: 350px;
+    padding: 10px 0 0 0;
+    height: 40px;
+    color: #fff;
+    background-color: #6f6fff;
+}
+.add-form span, .edit-form span {
+    font-size: 16px;
+    display: block;
+    margin: 10px 0 -10px 30px;
+}
+.close-form {
+    position: absolute;
+    font-size: 20px;
+    top: 12px;
+    right: 20px;
+}
+.close-form a {
+    color: #fff;
+}
+.close-form a:hover {
+    color: #333333;
+}
+.add-edit-input input {
+    margin: 10px 0 0 10px; 
+    padding: 5px 10px;
+    font-size: 16px;
+}
+.add-edit-input select {
+    margin: 10px 0 0 10px;
+    width: 215px;
+    padding: 5px;
+    font-size: 16px;
+}
+.add-edit-buttons {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-around;
+}
+.add-edit-buttons input[type="submit"], .add-edit-buttons input[type="reset"] {
+    cursor: pointer;
+    width: 100px;
+    background-color: #6f6fff;
+    border-radius: 5px;
+    color: #fff;
+}
+.add-edit-buttons input[type="submit"]:hover, .add-edit-buttons input[type="reset"]:hover {
+    background-color: #cc6600;
+    color: #333333;
+}
+.edit-img {
+    position: absolute;
+    top: 65px;
+    right: 10px;
+    width: 100px;
+    height: 100px;
+}
+.header-profile-user {
+    position: absolute;
+    z-index: 15;
+    top:35px;
+    left: 15px;
+    background-color: #bbbbbb;
+    border-radius: 5px;
+}
+.header-profile-admin {
+    width: 200px;
+    height: 100px;
+}
+.header-profile-common {
+    width: 200px;
+    height: 50px;
+}
+.header-profile-admin ~.profile-form-active-ref {
+    width: 50px;
+}
+.header-profile-user hr {
+    margin: 10px 0 0 0;
+    background-color: #000;
+}
+.header-profile-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.header-profile-nav span, .header-profile-nav input {
+    margin: 10px 0 0 5px;
+    width: 150px;
+    font-size: 18px;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 3px;
+    background-color: #6f6fff;
+}
+.header-profile-nav input {
+    width: 180px;
+    font-family: serif;
+}
+.header-profile-nav span:hover, .header-profile-nav input:hover {
+    color: #333333;
+    background-color: #c60;
 }

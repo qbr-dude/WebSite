@@ -37,6 +37,7 @@
                                 <input type="text" name="search" placeholder="Поиск по сайту">
                             </form>
                         </div>
+                        <!-- toggleBasket callAddForm-->
                         <div class="header-basket-container">
                             <a href="#" class="header_basket" onclick="toggleBasket()" id="basket-ref">
                                 <img src="../img/basket.svg" alt="basket_logo">
@@ -61,7 +62,19 @@
                             </div>
                         </div>
                         <div class="header-profile-container">
-                            <a href="#" class="header_profile" onclick="toggleLoginForm()" id="login-ref">
+                            <a href="#" class="header_profile" onclick="toggleUserMenu()" id="user-ref">
+                                <img src="../img/user.svg" alt="profile_logo">
+                                <span class="header_label">12334</span>
+                            </a>
+                            <div class="header-profile-user profile-form-inactive" id="user-div">
+                                <div class="header-profile-common">   
+                                    <hr>
+                                    <form action="" method="post">
+                                        <div class="header-profile-nav"><input type="button" value="Выйти из профиля"></div>
+                                    </form> 
+                                </div>
+                            </div>
+                            <!-- <a href="#" class="header_profile" onclick="toggleLoginForm()" id="login-ref">
                                 <img src="../img/user.svg" alt="profile_logo">
                                 <span class="header_label">личный кабинет</span>
                             </a>
@@ -95,7 +108,7 @@
                                         </div>
                                     </form>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -140,17 +153,50 @@
                     </a>
                 </div>
             </div>
-            <div class="add-edit-container" id="add-edit">
-                <div class="add-form-container">
-                    <div class="add-edit-header">
-                        <span>Добавить новый товар</span>
+            <div class="add-edit-content  profile-form-inactive" id="add-edit">
+                <div class="add-edit-container">
+                    <div class="add-form-content  profile-form-inactive" id="add-div">
+                        <div class="add-form-container">
+                            <div class="add-edit-header">
+                                <span>Добавить новый товар</span>
+                            </div>
+                            <div class="add-form">
+                                <form action="#" method="post">
+                                    <div class="add-edit-input"><input type="text" name="name" placeholder="Имя товара"/></div>
+                                    <div class="add-edit-input"><input type="text" name="cost" placeholder="Стоимость"/></div>
+                                    <div class="add-edit-input"><input type="text" name="type" placeholder="Тип товара"></div>
+                                    <span>Выберите фото для товара</span>
+                                    <div class="add-edit-input"><input type="file" accept=".jpg, .jpeg, .png" name="photo" id=""></div>
+                                    <div class="add-edit-buttons">
+                                        <div class="add-edit-input"><input type="reset" value="Сбросить"></div>
+                                        <div class="add-edit-input"><input type="submit" value="Создать"></div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="close-form"><a href="#" onclick="closeAddForm()">X</a></div>
+                        </div>
                     </div>
-                    <div class="add-form">
-                        <form action="#" method="post">
-                            <div class="add-edit-input"><input type="text" name="name" placeholder="Имя товара"/></div>
-                            <div class="add-edit-input"><input type="text" name="cost" placeholder="Имя товара"/></div>
-                            <div class="add-edit-input"><input type="file" accept=".jpg, .jpeg, .png" name="" id=""></div>
-                        </form>
+                    <div class="edit-form-content profile-form-inactive" id="edit-div">
+                        <div class="edit-form-container">
+                            <div class="add-edit-header">
+                                <span>Отредактировать товар</span>
+                            </div>
+                            <div class="edit-form">
+                                <form action="#" method="post">
+                                    <div class="add-edit-input"><input type="text" name="name" placeholder="Имя товара"/></div>
+                                    <div class="add-edit-input"><input type="text" name="cost" placeholder="Стоимость"/></div>
+                                    <div class="add-edit-input"><input type="text" name="type" placeholder="Тип товара"></div>
+                                    <span>Выберите фото для товара</span>
+                                    <div class="add-edit-input"><input type="file" accept=".jpg, .jpeg, .png" name="photo" id=""></div>
+                                    <div class="add-edit-buttons">
+                                        <div class="add-edit-input"><input type="reset" value="Сбросить"></div>
+                                        <div class="add-edit-input"><input type="submit" value="Создать"></div>
+                                    </div>
+                                </form>
+                            </div>
+                            <img src="../img/1.jpg" alt="" class="edit-img">
+                            <div class="close-form"><a href="#" onclick="closeEditForm()">X</a></div>
+                        </div>
                     </div>
                 </div>
             </div>

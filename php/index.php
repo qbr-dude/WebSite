@@ -427,7 +427,7 @@
                                 </a>
                             </div>
                             <div class="slider__product">
-                                <img src="../img/4.jpg" alt="">
+                                <a href="../html/item.html"><img src="../img/4.jpg" alt=""></a>
                                 <div class="slider__product__text">
                                     <div class="slider__product__label">
                                         <span>Видеокарта</span>
